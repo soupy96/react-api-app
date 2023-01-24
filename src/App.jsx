@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import './App.css';
 
 import CurrentWeather from './components/CurrentWeather';
-import DailyWeather from './components/dailyWeather';
-import HourlyWeather from './components/hourlyWeather';
+import DailyWeather from './components/DailyWeather';
+import HourlyWeather from './components/HourlyWeather';
 
 function App() {
   const [data, setData] = useState();
