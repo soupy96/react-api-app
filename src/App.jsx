@@ -31,8 +31,8 @@ function App() {
           });
       },
       () => {
-        setError(e);
-        console.error(`An error occurred: ${e}`);
+        setError('Unable to retrieve your location');
+        console.error('Unable to retrieve your location');
         alert('Unable to retrieve your location');
       }
     );
