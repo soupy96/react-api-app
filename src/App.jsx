@@ -1,31 +1,60 @@
 import { useState, useEffect } from 'react';
-import reactLogo from './assets/react.svg';
+
 import './App.css';
 
+import CurrentWeather from './components/CurrentWeather';
+import DailyWeather from './components/dailyWeather';
+import HourlyWeather from './components/hourlyWeather';
+
 function App() {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
   useEffect(() => {
-    fetch(
-      `http://api.openweathermap.org/data/2.5/forecast?id=524901&appid={52ae181bcb63ed3c13c14262a1f95bfb}`
-    )
-      .then((response) => response.json())
-      .then((usefulData) => {
-        console.log(usefulData);
-        setLoading(false);
-        setData(usefulData);
-      })
-      .catch((e) => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        fetch(
+          `https://api.open-meteo.com/v1/forecast?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation,weathercode,surface_pressure,cloudcover,visibility,windspeed_10m,winddirection_10m,windgusts_10m&daily=weathercode,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,precipitation_sum&current_weather=true&timeformat=unixtime&timezone=${timezone}`
+        )
+          .then((response) => response.json())
+          .then((weatherData) => {
+            console.log(weatherData);
+            setLoading(false);
+            setData(weatherData);
+          })
+          .catch((e) => {
+            setError(e);
+            console.error(`An error occurred: ${e}`);
+          });
+      },
+      () => {
+        setError(e);
         console.error(`An error occurred: ${e}`);
-      });
+        alert('Unable to retrieve your location');
+      }
+    );
   }, []);
 
   return (
-    <div className='App'>
-      {loading && <p>Loading...</p>}
-      {!loading && <p>Fetched data</p>}
+    <div>
+      <CurrentWeather />
+      <DailyWeather />
+      <HourlyWeather />
+      {loading ? (
+        <p>Loading...</p>
+      ) : !loading && error ? (
+        <p>{error}</p>
+      ) : !loading && !error && data ? (
+        <div>
+          <p>{data.latitude}</p>
+          <p>{data.longitude}</p>
+        </div>
+      ) : (
+        <p></p>
+      )}
     </div>
   );
 }
