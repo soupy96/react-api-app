@@ -7,7 +7,7 @@ import DailyWeather from './components/DailyWeather';
 import HourlyWeather from './components/HourlyWeather';
 
 function App() {
-  const [data, setData] = useState();
+  const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -21,7 +21,7 @@ function App() {
         )
           .then((response) => response.json())
           .then((weatherData) => {
-            console.log(weatherData);
+            // console.log(weatherData);
             setLoading(false);
             setData(weatherData);
           })
@@ -40,20 +40,28 @@ function App() {
 
   return (
     <div>
-      <CurrentWeather />
-      <DailyWeather />
-      <HourlyWeather />
       {loading ? (
         <p>Loading...</p>
       ) : !loading && error ? (
         <p>{error}</p>
       ) : !loading && !error && data ? (
         <div>
-          <p>{data.latitude}</p>
-          <p>{data.longitude}</p>
+          <CurrentWeather
+            currentWeatherData={data.current_weather}
+            lat={data.latitude}
+            long={data.longitude}
+          />
+          <DailyWeather
+            dailyWeatherData={data.daily}
+            dataUnits={data.daily_units}
+          />
+          <HourlyWeather
+            hourlyWeatherData={data.hourly}
+            dataUnits={data.hourly_units}
+          />
         </div>
       ) : (
-        <p></p>
+        <p>There was an error.</p>
       )}
     </div>
   );

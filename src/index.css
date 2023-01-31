@@ -68,3 +68,38 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* Custom CSS */
+.currentWeatherBox {
+  border: 1px solid red;
+  padding: 10px;
+}
+
+.dailyWeatherBox {
+  border: 1px solid blue;
+  padding: 10px;
+}
+
+.dailyWeatherFlexBox {
+  display: flex;
+}
+
+.hourlyWeatherFlexBox {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.hourlyWeatherBox p {
+  display: flex;
+  flex-direction: column;
+}
+
+.singleWeatherBox {
+  border: 1px solid purple;
+  padding: 10px;
+}
+
+.hourlyWeatherBox {
+  border: 1px solid green;
+  padding: 10px;
+}
