@@ -48,7 +48,7 @@ const SingleHourWeather = (props) => {
       </p>
       <p>
         <b>Weathercode: </b>
-        {props.weathercode}
+        <img src={`./src/assets/${props.weathercode}.png`} />
       </p>
       <p>
         <b>Wind Direction 10m: </b>

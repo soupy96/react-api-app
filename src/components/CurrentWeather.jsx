@@ -31,9 +31,13 @@ const CurrentWeather = (props) => {
       </p>
       <p>
         <b>Weather Code: </b>
-        {props.currentWeatherData.weathercode
-          ? props.currentWeatherData.weathercode
-          : 'N/A'}
+        {props.currentWeatherData.weathercode != null ? (
+          <img
+            src={`./src/assets/${props.currentWeatherData.weathercode}.png`}
+          />
+        ) : (
+          'N/A'
+        )}
       </p>
       <p>
         <b>Wind Direction: </b>

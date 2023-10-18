@@ -21,7 +21,7 @@ function App() {
         )
           .then((response) => response.json())
           .then((weatherData) => {
-            // console.log(weatherData);
+            console.log(weatherData);
             setLoading(false);
             setData(weatherData);
           })

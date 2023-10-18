@@ -73,11 +73,13 @@ button:focus-visible {
 .currentWeatherBox {
   border: 1px solid red;
   padding: 10px;
+  margin: 10px 0px;
 }
 
 .dailyWeatherBox {
   border: 1px solid blue;
   padding: 10px;
+  margin: 10px 0px;
 }
 
 .dailyWeatherFlexBox {

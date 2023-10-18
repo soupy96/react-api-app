@@ -52,7 +52,7 @@ const SingleDayWeather = (props) => {
       </p>
       <p>
         <b>Weather Code: </b>
-        {props.weathercode}
+        <img src={`./src/assets/${props.weathercode}.png`} />
       </p>
     </div>
   );
